@@ -27,6 +27,8 @@ err_t dosguard32_run(struct ip_hdr *iphdr, struct tcp_hdr *tcphdr, struct netif 
             return config_dosguard32.dense_nn(iphdr, tcphdr);
         case UDP_AND_TCP:
             return config_dosguard32.dense_nn(iphdr, tcphdr);
+        case TURNOFF:
+            return ERR_OK;
     }
 
     return ERR_OK;

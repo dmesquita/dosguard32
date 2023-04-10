@@ -5,7 +5,8 @@
 typedef enum _dosguard32_mode {
     UDP,
     TCP,
-    UDP_AND_TCP
+    UDP_AND_TCP,
+    TURNOFF
 } dosguard32_mode;
 
 #ifdef __cplusplus
