@@ -78,7 +78,7 @@ static void udp_server_task(void *pvParameters)
 #endif
         // Set timeout
         struct timeval timeout;
-        timeout.tv_sec = 3;
+        timeout.tv_sec = 300;
         timeout.tv_usec = 0;
         setsockopt (sock, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof timeout);
 

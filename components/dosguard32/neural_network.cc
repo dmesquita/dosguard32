@@ -36,6 +36,7 @@ tflite::MicroInterpreter* interpreter = &static_interpreter;
 TfLiteStatus allocate_status = interpreter->AllocateTensors();
 
 int64_t init_time = xTaskGetTickCount() * portTICK_PERIOD_MS /1000;
+int total_attack_packets = 0;
 
 err_t nn(struct ip_hdr *iphdr, struct tcp_hdr *tcphdr) {
   //ESP_LOGE(TAG, "inside nn");
@@ -67,6 +68,12 @@ err_t nn(struct ip_hdr *iphdr, struct tcp_hdr *tcphdr) {
 
   // Obtain the output from model's output tensor
   double value = output->data.f[0];
+  
+  if (value > 0.5) {
+   total_attack_packets = total_attack_packets + 1;   
+  };
+
+  MicroPrintf("TOTAL FILTERED ATTACK PACKETS: %d \n", total_attack_packets);
 
   return value > 0.5 ? ERR_ABRT : ERR_OK;
 }
